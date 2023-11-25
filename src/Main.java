@@ -180,6 +180,7 @@ public class Main {
         }
         if (test){
             System.out.println("you can show the chessboard if you press Y");
+            read.nextLine();
             String c = read.nextLine();
             if (c.equals("y")){
                 matrix.showMatrix();
