@@ -158,38 +158,42 @@ public class Main {
         System.out.println("have fun");
         Queens[] queens = new Queens[8];
         boolean test = true;
-        int row;
-        int col;
         do {
-            System.out.println("enter the position of your queen .");
-            System.out.print("row : ");
-            row = read.nextInt();
-            System.out.print("col : ");
-            col = read.nextInt();
-        }while (row > 7 || row < 0 || col > 7 || col < 0);
-        Position position = new Position(row,col);
-        int idOfQueens = Queens.getNumberOfQueen();
-        queens[idOfQueens] = new Queens(position,idOfQueens+1);
-        if (matrix.isSafe(queens[idOfQueens].getPosition())){
-            System.out.println("your queen number "+(idOfQueens + 1)+" is placed in the chessboard !");
-            matrix.setQueen(queens[idOfQueens]);
-        }else {
-            System.out.println("Game Over !");
-            System.out.println("your queen is placed in a dangerous place !");
-            test = false;
-        }
-        if (test){
-            System.out.println("you can show the chessboard if you press Y");
-            read.nextLine();
-            String c = read.nextLine();
-            if (c.equals("y")){
-                matrix.showMatrix();
+            int row;
+            int col;
+            do {
+                System.out.println("enter the position of your queen .");
+                System.out.print("row : ");
+                row = read.nextInt();
+                System.out.print("col : ");
+                col = read.nextInt();
+            }while (row > 7 || row < 0 || col > 7 || col < 0);
+            Position position = new Position(row,col);
+            int idOfQueens = Queens.getNumberOfQueen();
+            queens[idOfQueens] = new Queens(position,idOfQueens+1);
+            if (matrix.isSafe(queens[idOfQueens].getPosition())){
+                System.out.println("your queen number "+(idOfQueens + 1)+" is placed in the chessboard !");
+                matrix.setQueen(queens[idOfQueens]);
+            }else {
+                System.out.println("Game Over !");
+                System.out.println("your queen is placed in a dangerous place !");
+                test = false;
             }
-        }
-        if (Queens.getNumberOfQueen() < 8 && test){
-            System.out.println("you can now set the second queen");
-        } else if (Queens.getNumberOfQueen() == 8 && test) {
-            System.out.println("congratulation ! you win");
-        }
+            if (test){
+                System.out.println("you can show the chessboard if you press Y");
+                read.nextLine();
+                String c = read.nextLine();
+                if (c.equals("y")){
+                    matrix.showMatrix();
+                }
+            }
+            if (Queens.getNumberOfQueen() < 8 && test){
+                System.out.println("you can now set the second queen");
+            } else if (Queens.getNumberOfQueen() == 8 && test) {
+                System.out.println("congratulation ! you win");
+            }
+        }while (Queens.getNumberOfQueen()<8 && test == true);
+        System.out.println("this is the matrix : ");
+        matrix.showMatrix();
     }
 }
