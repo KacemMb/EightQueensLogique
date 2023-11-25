@@ -15,7 +15,7 @@ class Position{
         this.row = row;
         this.col = col;
     }
-}//class position have at attributes row,col
+}
 class Queens{
     private int id;
     private Position position;
@@ -33,34 +33,34 @@ class Queens{
     public static int getNumberOfQueen() {
         return numberOfQueen;
     }
-}// class queen have as attributes position,id and a static variable "numberOfQueens"
+}
 class Matrix{
     private int[][] matrix;
     public Matrix(){
         this.matrix = new int[8][8];
         initialiseMatrix();
-    }//constructor
+    }
     private void initialiseMatrix(){
         for (int i = 0;i < 8;i++){
             for (int j = 0;j < 8; j++){
                 this.matrix[i][j] = 0;
             }
         }
-    }//private methode used in the constructor that initialise every case in the matrix in 0
+    }
     public boolean isSafe(Position position){
         if (matrix[position.getRow()][position.getCol()] == 0){
             return true;
         }else {
             return false;
         }
-    }//methode return true if the position in the attributes of the methode have the value 0
+    }
     private boolean isSafe(int row,int col){
         if (matrix[row][col] == 0){
             return true;
         }else{
             return false;
         }
-    }//the same methode but in the parametre we have row and col as attributes
+    }
     public void setQueen(Queens queens){
         matrix[queens.getPosition().getRow()][queens.getPosition().getCol()] = 9;
         makeTopRightOnes(queens.getPosition());
@@ -69,7 +69,7 @@ class Matrix{
         makeBottomLeftOnes(queens.getPosition());
         makeVerticalTargetOnes(queens.getPosition());
         makeHorizontalTargetOnes(queens.getPosition());
-    }//method set the numbre 9 in a case and set numbre one in all cases within the target of the queen represented by 9
+    }
     private void makeTopRightOnes(Position position){
         int i = position.getRow();
         int j = position.getCol();
@@ -136,12 +136,13 @@ class Matrix{
             }
         }
     }
-    public void showMatrix(){
+    public void showMatrix() {
+        System.out.println("Chessboard Matrix:");
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                System.out.print("    "+matrix[i][j]);
+                System.out.printf("%4d", matrix[i][j]);
             }
-            System.out.println(" ");
+            System.out.println();
         }
     }// show the matrix
 }
@@ -149,23 +150,23 @@ public class Main {
     public static void main(String[] args){
         Scanner read= new Scanner(System.in);
         Matrix matrix = new Matrix();
-        System.out.println("welcom to my eight queens game !!");
-        System.out.println("in the chessboard we habe 64 squar");
-        System.out.println("you win if you put 8 queens that every queen can't kill the others");
-        System.out.println("- number 0 means that the square is free");
-        System.out.println("- number 1 means that the square within the target of a queen");
-        System.out.println("- number 9 means that a queen placed in that square");
-        System.out.println("have fun");
+        System.out.println("Welcome to my Eight Queens Game!!");
+        System.out.println("In the chessboard, we have 64 squares.");
+        System.out.println("You win if you put 8 queens, and each queen cannot attack the others.");
+        System.out.println("- Number 0 means that the square is free.");
+        System.out.println("- Number 1 means that the square is within the attack range of a queen.");
+        System.out.println("- Number 9 means that a queen is placed in that square.");
+        System.out.println("Have fun!");
         Queens[] queens = new Queens[8];
         boolean test = true;
         do {
             int row;
             int col;
             do {
-                System.out.println("enter the position of your queen .");
-                System.out.print("row : ");
+                System.out.println("Enter the position of your queen:");
+                System.out.print("Row (0-7): ");
                 row = read.nextInt();
-                System.out.print("col : ");
+                System.out.print("Column (0-7): ");
                 col = read.nextInt();
             }while (row > 7 || row < 0 || col > 7 || col < 0);
             Position position = new Position(row,col);
@@ -176,7 +177,7 @@ public class Main {
                 matrix.setQueen(queens[idOfQueens]);
             }else {
                 System.out.println("Game Over !");
-                System.out.println("your queen is placed in a dangerous place !");
+                System.out.println("Your queen is placed in a dangerous place!");
                 test = false;
             }
             if (test){
@@ -188,6 +189,7 @@ public class Main {
                 }
             }
             if (Queens.getNumberOfQueen() < 8 && test){
+                System.out.println("score = "+Queens.getNumberOfQueen());
                 System.out.println("you can now set the second queen");
             } else if (Queens.getNumberOfQueen() == 8 && test) {
                 System.out.println("congratulation ! you win");
